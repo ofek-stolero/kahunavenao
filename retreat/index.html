@@ -73,8 +73,10 @@ body::after {
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   border-bottom:1px solid rgba(44,31,26,.07);
 }
-.nav-logo { font-family:var(--serif);font-size:1.3rem;font-weight:400;letter-spacing:.05em;color:#fff;transition:color .4s; }
+.nav-logo { display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-size:1.3rem;font-weight:400;letter-spacing:.05em;color:#fff;transition:color .4s; }
+.nav-logo img { width:36px;height:36px;object-fit:contain;filter:brightness(0) invert(1);transition:filter .4s; }
 #nav.on .nav-logo { color:var(--brown); }
+#nav.on .nav-logo img { filter:none; }
 .nav-links { display:flex;gap:2.2rem;list-style:none; }
 .nav-links a {
   font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
@@ -395,7 +397,7 @@ footer {
 
 <!-- NAV -->
 <nav id="nav">
-  <a class="nav-logo" href="#">Kahuna Venao</a>
+  <a class="nav-logo" href="#"><img src="kahuna-logo.png" alt="Kahuna Venao">Kahuna Venao</a>
   <ul class="nav-links">
     <li><a href="#surf">Surf</a></li>
     <li><a href="#pilates">Pilates</a></li>
