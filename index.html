@@ -6,23 +6,34 @@
 <title>Kahuna Venao</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Georgia',serif;background:#FEFBF6;color:#2C1F1A;
-       display:flex;align-items:center;justify-content:center;
-       min-height:100vh;text-align:center;padding:2rem;padding-top:45vh}
-  .logo{width:clamp(180px,30vw,280px);height:auto;margin-bottom:1.2rem}
-  h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:400;letter-spacing:.02em;margin-bottom:1rem}
-  p{font-family:system-ui,sans-serif;font-size:.95rem;letter-spacing:.08em;
-    text-transform:uppercase;color:rgba(44,31,26,.5);margin-bottom:2.5rem}
-  a{display:inline-block;padding:.8rem 2rem;border:1px solid #C4714A;
-    color:#C4714A;font-family:system-ui,sans-serif;font-size:.75rem;
+  body{background:#FEFBF6;color:#2C1F1A;min-height:100vh;overflow:hidden}
+
+  .logo{
+    position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:clamp(180px,28vw,280px);height:auto;display:block;
+  }
+
+  .content{
+    position:absolute;left:50%;
+    top:calc(50% + clamp(105px,16.4vw,164px));
+    transform:translateX(-50%);
+    text-align:center;white-space:nowrap;
+    font-family:'Georgia',serif;
+  }
+  h1{font-size:clamp(1.6rem,4vw,3rem);font-weight:400;letter-spacing:.02em;margin-bottom:.8rem}
+  p{font-family:system-ui,sans-serif;font-size:.85rem;letter-spacing:.1em;
+    text-transform:uppercase;color:rgba(44,31,26,.45);margin-bottom:2rem}
+  a{display:inline-block;padding:.7rem 1.8rem;border:1px solid #C4714A;
+    color:#C4714A;font-family:system-ui,sans-serif;font-size:.72rem;
     letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
     transition:background .3s,color .3s}
   a:hover{background:#C4714A;color:#fff}
 </style>
 </head>
 <body>
-  <div>
-    <img class="logo" src="/retreat/kahuna-logo.png" alt="Kahuna Venao">
+  <img class="logo" src="/retreat/kahuna-logo.png" alt="Kahuna Venao">
+  <div class="content">
     <h1>Kahuna Venao</h1>
     <p>Coming Soon</p>
     <a href="/retreat">View Retreat →</a>
