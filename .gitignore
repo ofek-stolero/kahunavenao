@@ -1,0 +1,19 @@
+# System
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+*.tmp
+*.log
+
+# Video files (too large for GitHub — kept in iCloud)
+*.mp4
+*.MP4
+*.mov
+*.MOV
+*.avi
+*.AVI
+*.mkv
+*.MKV
