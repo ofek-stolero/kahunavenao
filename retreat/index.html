@@ -619,15 +619,19 @@ footer {
 </section>
 
 <!-- ═══ 09 SUNSET PARTY ═══ -->
-<section class="fvid" id="sunset">
-  <video class="bg" id="para2" autoplay muted loop playsinline>
-    <source src="%D7%90%D7%AA%D7%A8%20%D7%9C%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98/sunset%20party/0516%20%281%29%2815%29.mp4" type="video/mp4">
-  </video>
-  <div class="ov ov-dusk"></div>
-  <div class="fc">
-    <p class="eyebrow fi" style="color:rgba(255,255,255,.5)">09 — Community</p>
-    <h2 class="h2 white fi d1">Sunset Connection<br><em>Party</em></h2>
-    <p class="body white fi d2">As the sun sets over the ocean, we come together for an unforgettable evening of music, movement, and pure freedom. Barefoot on the sand, surrounded by beautiful people and golden skies — this is where unforgettable memories are made.</p>
+<section id="sunset">
+  <div class="split">
+    <div class="smedia" data-smedia>
+      <video autoplay muted loop playsinline>
+        <source src="%D7%90%D7%AA%D7%A8%20%D7%9C%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98/sunset%20party/0516%20%281%29%2815%29.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="stxt blush">
+      <span class="deco-line fi"></span>
+      <p class="eyebrow fi">09 — Community</p>
+      <h2 class="h2 fi d1">Sunset Connection<br><em>Party</em></h2>
+      <p class="body fi d2">As the sun sets over the ocean, we come together for an unforgettable evening of music, movement, and pure freedom. Barefoot on the sand, surrounded by beautiful people and golden skies — this is where unforgettable memories are made.</p>
+    </div>
   </div>
 </section>
 
@@ -752,19 +756,12 @@ setTimeout(() => {
 
 // ─── PARALLAX (hero + fvid sections) ─────────────────────────────────────────
 const heroVid = document.getElementById('hero-vid');
-const para2   = document.getElementById('para2');
 let rafId;
 
 function applyParallax() {
   const sy = window.scrollY;
   // Hero video: moves at ~38% of scroll — creates depth
   if (heroVid) heroVid.style.transform = `translateY(${sy * 0.38}px)`;
-  // Cinematic sections: offset from section midpoint
-  [para2].forEach(vid => {
-    if (!vid) return;
-    const rect = vid.closest('.fvid').getBoundingClientRect();
-    const offset = (window.innerHeight * 0.5 - rect.top - rect.height * 0.5);
-    vid.style.transform = `translateY(${offset * 0.2}px)`;
   });
   rafId = null;
 }
