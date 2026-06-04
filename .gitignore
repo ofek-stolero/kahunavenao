@@ -8,9 +8,7 @@ Thumbs.db
 *.tmp
 *.log
 
-# Video files (too large for GitHub — kept in iCloud)
-*.mp4
-*.MP4
+# Raw/original video formats only
 *.mov
 *.MOV
 *.avi
