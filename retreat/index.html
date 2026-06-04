@@ -569,16 +569,20 @@ footer {
 </section>
 
 <!-- ═══ 07 WATERFALL ═══ -->
-<section class="fvid" id="waterfall">
-  <video class="bg" id="para1" autoplay muted loop playsinline>
-    <source src="%D7%90%D7%AA%D7%A8%20%D7%9C%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98/waterfall/dji_fly_20260506_150130_0715_1778109620632_video.mp4" type="video/mp4">
-  </video>
-  <div class="ov ov-jungle"></div>
-  <div class="fc">
-    <p class="eyebrow fi" style="color:rgba(255,255,255,.5)">07 — Nature</p>
-    <h2 class="h2 white fi d1">Lake &amp; Waterfall<br><em>Nature Experience</em></h2>
-    <p class="body white fi d2">Escape into the heart of Panama's natural beauty with a full-day adventure to a hidden lake and waterfall surrounded by lush jungle landscapes. Whether swimming beneath the waterfall, relaxing by the lake, or simply taking in the beauty of the surroundings, this day offers the perfect balance of adventure, grounding, and pure tranquility.</p>
-    <a class="btn fi d3" href="#contact">Join the Retreat</a>
+<section id="waterfall">
+  <div class="split">
+    <div class="smedia" data-smedia>
+      <video autoplay muted loop playsinline>
+        <source src="%D7%90%D7%AA%D7%A8%20%D7%9C%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98/waterfall/dji_fly_20260506_150130_0715_1778109620632_video.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="stxt sand">
+      <span class="deco-line fi"></span>
+      <p class="eyebrow fi">07 — Nature</p>
+      <h2 class="h2 fi d1">Lake &amp; Waterfall<br><em>Nature Experience</em></h2>
+      <p class="body fi d2">Escape into the heart of Panama's natural beauty with a full-day adventure to a hidden lake and waterfall surrounded by lush jungle landscapes. Whether swimming beneath the waterfall, relaxing by the lake, or simply taking in the beauty of the surroundings, this day offers the perfect balance of adventure, grounding, and pure tranquility.</p>
+      <a class="btn fi d3" href="#contact">Join the Retreat</a>
+    </div>
   </div>
 </section>
 
@@ -748,7 +752,6 @@ setTimeout(() => {
 
 // ─── PARALLAX (hero + fvid sections) ─────────────────────────────────────────
 const heroVid = document.getElementById('hero-vid');
-const para1   = document.getElementById('para1');
 const para2   = document.getElementById('para2');
 let rafId;
 
@@ -757,7 +760,7 @@ function applyParallax() {
   // Hero video: moves at ~38% of scroll — creates depth
   if (heroVid) heroVid.style.transform = `translateY(${sy * 0.38}px)`;
   // Cinematic sections: offset from section midpoint
-  [para1, para2].forEach(vid => {
+  [para2].forEach(vid => {
     if (!vid) return;
     const rect = vid.closest('.fvid').getBoundingClientRect();
     const offset = (window.innerHeight * 0.5 - rect.top - rect.height * 0.5);
