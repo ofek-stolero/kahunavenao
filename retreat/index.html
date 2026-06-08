@@ -363,21 +363,102 @@ footer {
 }
 .foot-copy { font-size:.75rem;color:rgba(255,255,255,.26); }
 
+/* ── MUTE BUTTON ── */
+.hero-mute {
+  position:absolute;bottom:2.5rem;right:2.5rem;z-index:10;
+  width:44px;height:44px;border-radius:50%;padding:0;
+  border:1.5px solid rgba(255,255,255,.5);background:rgba(0,0,0,.32);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  color:#fff;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .2s;
+}
+.hero-mute:hover{background:rgba(0,0,0,.54);transform:scale(1.08);}
+
+/* ── VID-OV: gradient text overlay inside smedia (surf + pilates desktop) ── */
+.vid-ov {
+  position:absolute;inset:0;z-index:2;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:4rem;
+  background:linear-gradient(to top,rgba(0,0,0,.84) 0%,rgba(0,0,0,.36) 42%,transparent 72%);
+}
+.vid-ov .eyebrow{color:var(--terra-lt);}
+.vid-ov .h2{color:#fff;}
+.vid-ov .body{color:rgba(255,255,255,.72);max-width:440px;}
+.vid-ov .deco-line{background:rgba(255,255,255,.5);}
+
 /* ── RESPONSIVE ── */
 @media(max-width:960px){
-  #nav { padding:0 1.5rem; }
-  .nav-links { display:none; }
-  .split,.split.rev { grid-template-columns:1fr;direction:ltr; }
-  .smedia { min-height:58vw;transform:none!important; }
-  .stxt { padding:3.5rem 2rem; }
-  #pilates .smedia, #waterfall .smedia, #sunset .smedia { order:2; }
-  #pilates .stxt,   #waterfall .stxt,   #sunset .stxt   { order:1; }
-  #hero .hc { padding:0 2rem 4rem; }
-  .fvid .fc { padding:3rem 2rem; }
-  .strip { grid-template-columns:1fr 1fr;padding:2.5rem 1.5rem; }
-  .cgrid { grid-template-columns:1fr; }
-  .contact { grid-template-columns:1fr;padding:5rem 2rem;gap:3rem; }
-  footer { grid-template-columns:1fr;padding:4rem 2rem 2rem; }
+  html{scroll-behavior:auto;scroll-snap-type:y mandatory;}
+
+  /* NAV */
+  #nav{padding:0 1.5rem;}
+  .nav-links{display:none;}
+
+  /* ALL VIDEO SECTIONS → 100dvh snap points */
+  #hero,#surf,#pilates,#experiences,#food,#iguana,#waterfall,#rituals,#sunset,#padel{
+    height:100dvh;position:relative;overflow:hidden;
+    scroll-snap-align:start;scroll-snap-stop:always;
+  }
+
+  /* SPLIT → full-screen block container */
+  .split,.split.rev{display:block;direction:ltr;position:relative;height:100%;}
+
+  /* SMEDIA → fills entire section */
+  .smedia{
+    position:absolute!important;inset:0;
+    height:100%!important;min-height:unset!important;
+    transform:none!important;z-index:0;
+  }
+  .smedia video{
+    top:0!important;left:0;right:0;bottom:0!important;
+    height:100%!important;animation:none!important;
+  }
+
+  /* STXT → gradient overlay at bottom */
+  .stxt{
+    position:absolute!important;bottom:0;left:0;right:0;z-index:2;
+    padding:2rem 1.5rem 5rem!important;
+    background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(0,0,0,.5) 45%,transparent 82%)!important;
+  }
+  .stxt .h2,.stxt h2{color:#fff!important;}
+  .stxt .eyebrow{color:var(--terra-lt)!important;}
+  .stxt .body{color:rgba(255,255,255,.72)!important;}
+  .stxt .deco-line{background:var(--terra-lt)!important;}
+  /* hide extras */
+  .stxt .clip,.stxt .brand-badge,.stxt .small,.stxt .body+.body{display:none!important;}
+
+  /* remove old order overrides (not needed with absolute layout) */
+  #pilates .smedia,#waterfall .smedia,#sunset .smedia{order:unset!important;}
+  #pilates .stxt,#waterfall .stxt,#sunset .stxt{order:unset!important;}
+
+  /* 2-VID DESKTOP SECTIONS: hide right panel on mobile */
+  .smedia-r{display:none!important;}
+
+  /* VID-OV: hide extras on mobile */
+  .vid-ov .brand-badge,.vid-ov .small{display:none!important;}
+
+  /* HERO adjustments */
+  #hero .hc{padding:0 2rem 4rem;}
+  .hero-mute{bottom:6rem;right:1.2rem;}
+
+  /* FOOD: first card full-screen, hide header + second card */
+  #food>div:first-child{display:none!important;}
+  #food .cgrid{position:absolute;inset:0;display:block;height:100%;}
+  #food .card{position:absolute;inset:0;height:100%;aspect-ratio:unset;min-height:unset;opacity:1;transform:none;}
+  #food .card:last-child{display:none!important;}
+
+  /* RITUALS: same */
+  #rituals>div:first-child{display:none!important;}
+  #rituals .cgrid{position:absolute;inset:0;display:block;height:100%;}
+  #rituals .card{position:absolute;inset:0;height:100%;aspect-ratio:unset;min-height:unset;opacity:1;transform:none;}
+  #rituals .card:last-child{display:none!important;}
+
+  /* Remaining layout */
+  .fvid .fc{padding:3rem 2rem;}
+  .strip{grid-template-columns:1fr 1fr;padding:2.5rem 1.5rem;}
+  .contact{grid-template-columns:1fr;padding:5rem 2rem;gap:3rem;}
+  footer{grid-template-columns:1fr;padding:4rem 2rem 2rem;}
 }
 
 /* ── REDUCED MOTION ── */
@@ -412,7 +493,7 @@ footer {
 <!-- ═══ 01 HERO ═══ -->
 <section id="hero">
   <video class="bg" id="hero-vid" autoplay muted loop playsinline>
-    <source src="kahunaRetreat.mp4" type="video/mp4">
+    <source src="kahunaRetreatNew.mp4" type="video/mp4">
   </video>
   <div class="ov"></div>
   <div class="hc" id="hc">
@@ -425,36 +506,36 @@ footer {
     <p class="body white fi d3">A surf and wellness retreat at one of Panama's most incredible bays — where every session in the ocean, every morning on the mat, and every moment in nature brings you closer to yourself.</p>
     <a class="btn fi d4" href="#contact">Get in Touch</a>
   </div>
+  <button class="hero-mute" id="hero-mute" aria-label="Toggle audio">
+    <svg id="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+    <svg id="icon-sound" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+  </button>
 </section>
 
 <!-- ═══ 02 SURF ═══ -->
 <section id="surf">
-  <div class="split">
-    <div class="stxt cream">
-      <!-- Organic blob -->
-      <div class="blob" style="right:-6%;top:-4%;width:260px;height:260px;opacity:.14">
-        <svg viewBox="0 0 200 200"><path fill="#E4D9CC" d="M47.1,-58.7C58.3,-49.2,63.2,-32.3,65.7,-15.3C68.2,1.6,68.4,18.7,61.2,32.3C54.1,45.9,39.8,55.9,24.1,62.3C8.5,68.7,-8.5,71.5,-24.1,67.2C-39.7,62.8,-53.9,51.3,-62.4,36.3C-70.9,21.3,-73.7,2.8,-69.7,-13.6C-65.8,-30,-55.1,-44.3,-42,-54.3C-28.9,-64.3,-14.5,-70,-0.4,-69.5C13.6,-69,35.9,-68.2,47.1,-58.7Z" transform="translate(100 100)"/></svg>
-      </div>
-      <span class="deco-line fi"></span>
-      <p class="eyebrow fi">02 — Surf</p>
-      <h2 class="h2 fi d1">Surf Experience<br><em>in Playa Venao</em></h2>
-      <p class="body fi d2">Whether it's your very first wave or you're already experienced in the ocean, our surf sessions are designed to meet you exactly where you are. Playa Venao offers one of the most incredible surf bays in Panama, with consistent waves for every level — from complete beginners to advanced surfers.</p>
-      <p class="body fi d3">Our instructors guide you step by step through the foundations of surfing, helping you build confidence, independence, and a real connection with the ocean. Every surf session is professionally filmed, allowing us to provide personalized video analysis that helps each participant improve faster and understand their technique on a deeper level.</p>
-      <p class="small fi d4">More than just a sport, surfing becomes a personal journey of growth, freedom, presence, and fun.</p>
-      <a class="brand-badge badge-kahuna fi d4"
-         href="https://www.instagram.com/kahunavenao?igsh=ZGFuYXBibW80MHc5"
-         target="_blank" rel="noopener">
-        <div class="bb-logo"><img src="kahuna-logo.png" alt="Kahuna Venao" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=\'font-family:serif;font-size:.7rem;font-weight:700;color:#c4714a;text-align:center;line-height:1.1;padding:2px\'>KAHUNA<br>VENAO</span>'"></div>
-        <div class="bb-text"><span class="bb-name">Kahuna Venao</span><span class="bb-sub">Playa Venao, Panama</span></div>
-        <svg class="bb-ig" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-      </a>
-      <div class="clip fi d4">
-        <video autoplay muted loop playsinline>
-          <source src="%D7%90%D7%AA%D7%A8%20%D7%9C%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98/surf%20lessons/dji_fly_20260503_071654_0626_1777815636344_video.mp4" type="video/mp4">
-        </video>
+  <div class="split split-2vid">
+    <!-- Left: drone surf video + text overlay -->
+    <div class="smedia" data-smedia>
+      <video autoplay muted loop playsinline>
+        <source src="%D7%90%D7%AA%D7%A8%20%D7%9C%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98/surf%20lessons/dji_fly_20260503_071654_0626_1777815636344_video.mp4" type="video/mp4">
+      </video>
+      <div class="vid-ov">
+        <span class="deco-line fi"></span>
+        <p class="eyebrow fi">02 — Surf</p>
+        <h2 class="h2 fi d1">Surf Experience<br><em>in Playa Venao</em></h2>
+        <p class="body fi d2">Whether it's your very first wave or you're already experienced, our sessions meet you where you are. Playa Venao offers one of the most incredible surf bays in Panama — consistent waves, expert instruction, and personalized video analysis.</p>
+        <a class="brand-badge badge-kahuna fi d3"
+           href="https://www.instagram.com/kahunavenao?igsh=ZGFuYXBibW80MHc5"
+           target="_blank" rel="noopener">
+          <div class="bb-logo"><img src="kahuna-logo.png" alt="Kahuna Venao" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=\'font-family:serif;font-size:.7rem;font-weight:700;color:#c4714a;text-align:center;line-height:1.1;padding:2px\'>KAHUNA<br>VENAO</span>'"></div>
+          <div class="bb-text"><span class="bb-name">Kahuna Venao</span><span class="bb-sub">Playa Venao, Panama</span></div>
+          <svg class="bb-ig" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
       </div>
     </div>
-    <div class="smedia" data-smedia>
+    <!-- Right: in-water surf video -->
+    <div class="smedia smedia-r" data-smedia>
       <video autoplay muted loop playsinline>
         <source src="%D7%90%D7%AA%D7%A8%20%D7%9C%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98/surf%20lessons/dji_fly_20260502_063330_0581_1777735658543_video.mp4" type="video/mp4">
       </video>
@@ -464,31 +545,31 @@ footer {
 
 <!-- ═══ 03 PILATES ═══ -->
 <section id="pilates">
-  <div class="split">
+  <div class="split split-2vid">
+    <!-- Left: aerial pilates video + text overlay -->
     <div class="smedia" data-smedia>
       <video autoplay muted loop playsinline>
         <source src="%D7%90%D7%AA%D7%A8%20%D7%9C%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98/pilates/dji_fly_20260504_182502_0656_1777937744671_video.mp4" type="video/mp4">
       </video>
-    </div>
-    <div class="stxt sage">
-      <span class="deco-line fi"></span>
-      <p class="eyebrow fi">03 — Pilates</p>
-      <h2 class="h2 fi d1">Pilates Studio<br><em>Experience</em></h2>
-      <p class="body fi d2">Move, strengthen, and reconnect with your body in one of the most unique Pilates studios you'll find in Central America. Our studio combines world-class equipment, breathtaking tropical surroundings, and an intentional wellness atmosphere designed to elevate every session into a full mind-body experience.</p>
-      <p class="body fi d3">Equipped with premium Merrithew reformer beds — known globally for their exceptional quality and performance — our classes are suitable for every level, from complete beginners to advanced practitioners. Each session focuses on mindful movement, core strength, flexibility, posture, and creating a deeper connection with your body.</p>
-      <p class="small fi d4">More than just a workout, our Pilates experience is designed to leave you feeling grounded, energized, aligned, and fully present.</p>
-      <a class="brand-badge badge-akua fi d4"
-         href="https://www.instagram.com/akuapilates?igsh=MXR0MHpiZnhuc24yaQ=="
-         target="_blank" rel="noopener">
-        <div class="bb-logo"><img src="akua-logo.png" alt="Akua Pilates" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=\'font-family:serif;font-size:.68rem;font-weight:700;color:#D4F241;text-align:center;line-height:1.1;padding:2px\'>AKUA<br>PILATES</span>'"></div>
-        <div class="bb-text"><span class="bb-name">Akua Pilates</span><span class="bb-sub">Movement &amp; Wellness</span></div>
-        <svg class="bb-ig" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-      </a>
-      <div class="clip fi d4">
-        <video autoplay muted loop playsinline>
-          <source src="%D7%90%D7%AA%D7%A8%20%D7%9C%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98/pilates/C0571.mp4" type="video/mp4">
-        </video>
+      <div class="vid-ov">
+        <span class="deco-line fi"></span>
+        <p class="eyebrow fi">03 — Pilates</p>
+        <h2 class="h2 fi d1">Pilates Studio<br><em>Experience</em></h2>
+        <p class="body fi d2">Move, strengthen, and reconnect in one of Central America's most unique studios. Premium Merrithew reformers, breathtaking tropical surroundings — every level welcome, every session transformative.</p>
+        <a class="brand-badge badge-akua fi d3"
+           href="https://www.instagram.com/akuapilates?igsh=MXR0MHpiZnhuc24yaQ=="
+           target="_blank" rel="noopener">
+          <div class="bb-logo"><img src="akua-logo.png" alt="Akua Pilates" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=\'font-family:serif;font-size:.68rem;font-weight:700;color:#D4F241;text-align:center;line-height:1.1;padding:2px\'>AKUA<br>PILATES</span>'"></div>
+          <div class="bb-text"><span class="bb-name">Akua Pilates</span><span class="bb-sub">Movement &amp; Wellness</span></div>
+          <svg class="bb-ig" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
       </div>
+    </div>
+    <!-- Right: reformer close-up video -->
+    <div class="smedia smedia-r" data-smedia>
+      <video autoplay muted loop playsinline>
+        <source src="%D7%90%D7%AA%D7%A8%20%D7%9C%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98/pilates/C0571.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
@@ -834,9 +915,33 @@ window.addEventListener('scroll', () => {
 
 // ─── VIDEO PLAY / PAUSE ON VISIBILITY ─────────────────────────────────────────
 const vio = new IntersectionObserver(entries => {
-  entries.forEach(e => { e.isIntersecting ? e.target.play().catch(() => {}) : e.target.pause(); });
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.play().catch(() => {
+        // Browser blocked autoplay — retry on first user gesture
+        const retry = () => e.target.play().catch(() => {});
+        document.addEventListener('click',      retry, { once: true, passive: true });
+        document.addEventListener('touchstart', retry, { once: true, passive: true });
+        document.addEventListener('keydown',    retry, { once: true, passive: true });
+      });
+    } else {
+      e.target.pause();
+    }
+  });
 }, { threshold: 0.04 });
 document.querySelectorAll('video').forEach(v => vio.observe(v));
+
+// ─── HERO MUTE TOGGLE ──────────────────────────────────────────────────────────
+const heroMuteBtn = document.getElementById('hero-mute');
+const iconMuted   = document.getElementById('icon-muted');
+const iconSound   = document.getElementById('icon-sound');
+if (heroMuteBtn && heroVid) {
+  heroMuteBtn.addEventListener('click', () => {
+    heroVid.muted = !heroVid.muted;
+    iconMuted.style.display = heroVid.muted ? '' : 'none';
+    iconSound.style.display = heroVid.muted ? 'none' : '';
+  });
+}
 </script>
 </body>
 </html>
