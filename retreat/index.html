@@ -366,14 +366,15 @@ footer {
 /* ── MUTE BUTTON ── */
 .hero-mute {
   position:absolute;bottom:2.5rem;right:2.5rem;z-index:10;
-  width:44px;height:44px;border-radius:50%;padding:0;
-  border:1.5px solid rgba(255,255,255,.5);background:rgba(0,0,0,.32);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  width:auto;height:auto;border-radius:0;padding:0;
+  border:none;background:none;
   color:#fff;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  transition:background .2s,transform .2s;
+  opacity:.85;
+  transition:opacity .2s,transform .2s;
+  filter:drop-shadow(0 1px 3px rgba(0,0,0,.5));
 }
-.hero-mute:hover{background:rgba(0,0,0,.54);transform:scale(1.08);}
+.hero-mute:hover{opacity:1;transform:scale(1.08);}
 
 /* ── VID-OV: gradient text overlay inside smedia (surf + pilates desktop) ── */
 .vid-ov {
@@ -507,8 +508,8 @@ footer {
     <a class="btn fi d4" href="#contact">Get in Touch</a>
   </div>
   <button class="hero-mute" id="hero-mute" aria-label="Toggle audio">
-    <svg id="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-    <svg id="icon-sound" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+    <svg id="icon-muted" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+    <svg id="icon-sound" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
   </button>
 </section>
 
